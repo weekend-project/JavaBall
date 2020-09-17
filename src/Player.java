@@ -72,6 +72,8 @@ class Player {
         return hits;
     }
 
+    public String getName() {return name;}
+
     public double[] getStatsArray() {
         double[] statsArray = {this.speed, this.throwing, this.fielding, this.hitPower, this.hitContact};
         return statsArray;

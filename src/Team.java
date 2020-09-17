@@ -90,15 +90,34 @@ public class Team {
     Player sOhtani = new Player(false,87.2,89.3,91.5,98.8,95.6,'r','r',"Shohei Ohtani",27);
     Player aPujols = new Player(false,87.2,89.3,91.5,98.8,95.6,'r','r',"Albert Pujols",27);
 
-    private Player[] startingLineup = {aHeaney,dFletcher,jWalsh,mTrout,aRendon,sOhtani,jAdell,aSimmons,jUpton,mStassi};
-    private Pitcher[] startingPitchers = {aHeaney,dBundy,gCanning,jBarria,jTeheran};
-    private Pitcher[] bullpen = {tButtery,nRamirez,mMayers,hRobles,jBarnes,mAndriese,cBedrosian,fPena,hMilner};
+    private Player[] lineup;
+    private Pitcher[] starters;
+    private Pitcher[] pen;
 
-    public Team() {
-        Player[] lineup = startingLineup;
-        Pitcher[] starters = startingPitchers;
-        Pitcher[] pen = bullpen;
+    private Player[] startingLineupAngels = {aHeaney,dFletcher,jWalsh,mTrout,aRendon,sOhtani,jAdell,aSimmons,jUpton,mStassi};
+    private Pitcher[] startingPitchersAngels = {aHeaney,dBundy,gCanning,jBarria,jTeheran};
+    private Pitcher[] bullpenAngels = {tButtery,nRamirez,mMayers,hRobles,jBarnes,mAndriese,cBedrosian,fPena,hMilner};
+
+    public Team(int teamNumber) {
+            lineup = startingLineupAngels;
+            starters = startingPitchersAngels;
+            pen = bullpenAngels;
     }
 
+    public Player[] getLineup() {
+            return lineup;
+    }
+
+    public Pitcher[] getStarters() {
+            return startingPitchersAngels;
+    }
+
+    public Pitcher[] getPen() {
+            return bullpenAngels;
+    }
+
+    public String getPlayerName(int index) {
+        return lineup[index].getName();
+    }
 }
 
