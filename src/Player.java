@@ -1,10 +1,6 @@
 class Player {
 
     private boolean isPitcher;
-    private double fastball;
-    private double curveball;
-    private double slider;
-    private double changeup;
     private double speed;
     private double throwing;
     private double fielding;
@@ -87,6 +83,22 @@ class Player {
 
 class Pitcher extends Player {
 
+    private double fastball;
+    private double curveball;
+    private double slider;
+    private double changeup;
+    private boolean isPitcher;
+    private double speed;
+    private double throwing;
+    private double fielding;
+    private double hitPower;
+    private double hitContact;
+    private char handed;
+    private char hits;
+    private String name;
+    private int number;
+    private String pos;
+
     public Pitcher(boolean isPitcher,
                    double fastball,
                    double curveball,
@@ -102,6 +114,27 @@ class Pitcher extends Player {
                    String name,
                    int number) {
         super(isPitcher, speed, throwing, fielding, hitPower, hitContact, handed, hits, name, number);
+
+        this.fastball = fastball;
+        this.curveball = curveball;
+        this.slider = slider;
+        this.changeup = changeup;
+        this.isPitcher = isPitcher;
+        this.speed = speed;
+        this.throwing = throwing;
+        this.fielding = fielding;
+        this.hitPower = hitPower;
+        this.hitContact = hitContact;
+        this.handed = handed;
+        this.hits = hits;
+        this.name = name;
+        this.number = number;
     }
+
+    public double getFastball(){return fastball;}
+    public double getCurveball(){return curveball;}
+    public double getSlider(){return slider;}
+    public double getChangeup(){return changeup;}
+
 
 }

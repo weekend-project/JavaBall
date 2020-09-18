@@ -39,8 +39,8 @@ public class Team {
 //    Taylor Ward       3       R/R
 
     //pitchers
-    Pitcher mAndriese = new Pitcher(true,87.1,89.4,78.1,79.2,65.1,85.8,
-            56.4,32.1,18.4,'r','r',"Matt Andriese",35);
+    Pitcher mAndriese = new Pitcher(true,87.1,89.4,78.1,79.2,
+            65.1,85.8,56.4,32.1,18.4,'r','r',"Matt Andriese",35);
     Pitcher jBarnes = new Pitcher(true,87.1,89.4,78.1,79.2,87.2,89.3,
             91.5,98.8,95.6,'r','r',"Jacob Barnes",27);
     Pitcher jBarria = new Pitcher(true,87.1,89.4,78.1,79.2,87.2,89.3,
@@ -119,5 +119,7 @@ public class Team {
     public String getPlayerName(int index) {
         return lineup[index].getName();
     }
+
+    public double getFastball() {return aHeaney.getFastball();}
 }
 
