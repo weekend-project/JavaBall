@@ -53,7 +53,7 @@ public class Team {
             91.5,98.8,95.6,'r','r',"Ty Buttrey",27);
     Pitcher gCanning = new Pitcher(true,87.1,89.4,78.1,79.2,87.2,89.3,
             91.5,98.8,95.6,'r','r',"Griffin Canning",27);
-    Pitcher aHeaney = new Pitcher(true,89.1,91.5,92.8,86.9,78.3,89.3,
+    Pitcher aHeaney = new Pitcher(true,0.2,91.5,92.8,86.9,78.3,89.3,
             78.5,32.8,11.5,'L','L',"Andrew Heaney",28);
     Pitcher mMayers = new Pitcher(true,87.1,89.4,78.1,79.2,87.2,89.3,
             91.5,98.8,95.6,'r','r',"Mike Mayers",27);
@@ -98,10 +98,21 @@ public class Team {
     private Pitcher[] startingPitchersAngels = {aHeaney,dBundy,gCanning,jBarria,jTeheran};
     private Pitcher[] bullpenAngels = {tButtery,nRamirez,mMayers,hRobles,jBarnes,mAndriese,cBedrosian,fPena,hMilner};
 
+    private Player[] startingLineupCubs = {dBundy,dFletcher,jWalsh,mTrout,aRendon,sOhtani,jAdell,aSimmons,jUpton,mStassi};
+    private Pitcher[] startingPitchersCubs = {aHeaney,dBundy,gCanning,jBarria,jTeheran};
+    private Pitcher[] bullpenCubs = {tButtery,nRamirez,mMayers,hRobles,jBarnes,mAndriese,cBedrosian,fPena,hMilner};
+
     public Team(int teamNumber) {
+        if (teamNumber == 1) {
             lineup = startingLineupAngels;
             starters = startingPitchersAngels;
             pen = bullpenAngels;
+        } else if (teamNumber == 2) {
+            lineup = startingLineupCubs;
+            starters = startingPitchersCubs;
+            pen = bullpenCubs;
+        }
+
     }
 
     public Player[] getLineup() {
@@ -112,6 +123,10 @@ public class Team {
             return startingPitchersAngels;
     }
 
+    public String getStarterNames(int index) {
+        return startingPitchersAngels[index].getName();
+    }
+
     public Pitcher[] getPen() {
             return bullpenAngels;
     }
@@ -120,6 +135,8 @@ public class Team {
         return lineup[index].getName();
     }
 
-    public double getFastball() {return aHeaney.getFastball();}
+    public double getSpecificPitchRating(Pitcher pitcher, int pitchType) {
+        return pitcher.getPitchRating(pitchType);
+    }
 }
 

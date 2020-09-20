@@ -3,11 +3,22 @@ import java.util.Scanner;
 public class Main {
 
     private static Team playerTeam;
+    private static Team cpuTeam;
     private static boolean home;
+    private static int strikes = 0;
+    private static int balls = 0;
+    private static int outs = 0;
+    private static int batter = 1;
+    private static int cpuScore = 0;
+
+    private static boolean[] baseRunners = new boolean[3];
+
+
+
 
     public static void main(String[] args) throws InterruptedException {
         teamSelect();
-        startGame(playerTeam, home);
+        startGame(playerTeam, cpuTeam, home);
     }
 
     public static void teamSelect() {
@@ -19,8 +30,12 @@ public class Main {
         if (team == 1) {
             System.out.println("You chose the Angels!");
             playerTeam = new Team(1);
-        } else
+            cpuTeam = new Team(2);
+        } else {
             System.out.println("You chose the Cubs!");
+            playerTeam = new Team(2);
+            cpuTeam = new Team(1);
+        }
         System.out.println("Home - 1");
         System.out.println("Away - 2");
         System.out.print("Do you want to play home or away? ");
@@ -34,53 +49,41 @@ public class Main {
         }
     }
 
-    public static void startGame(Team playerTeam, boolean home) throws InterruptedException {
-        int outs = 0;
-        int batter = 1;
-        final int PITCHER = 0;
-        int strikes = 0;
-        int balls = 0;
+    public static void startGame(Team playerTeam, Team cpuTeam, boolean home) throws InterruptedException {
+        int playerScore = 0;
+        int startingPitcher;
+        int selectedPitch;
+
         Player[] lineup = playerTeam.getLineup();
         Pitcher[] bullpen = playerTeam.getPen();
-        Scanner pitchSelect = new Scanner(System.in);
-
+        Pitcher[] starters = playerTeam.getStarters();
 
         if (home) {
+            startingPitcher = getStartingPitcher(starters);
+
             do {
-                System.out.println("Pitching: " + playerTeam.getPlayerName(PITCHER));
-                System.out.println();
+                displayPitcherName(startingPitcher);
+                displayBatterName(batter);
+
                 do {
-                    Thread.sleep(1000);
-                    System.out.println("Select a pitch:");
-                    System.out.println("Fastball (1)  |  Curveball (2)  |  Slider (3)  |  Changeup (4)");
-                    System.out.println();
-                    int selectedPitch = pitchSelect.nextInt();
-                    if (selectedPitch == 1) {
-                        System.out.println(playerTeam.getPlayerName(PITCHER) + " throws a fastball");
-                        Thread.sleep(500);
-                        fastballAnimation();
-                        Thread.sleep(500);
-                        Pitch pitch = new Pitch(playerTeam.getFastball(), 1);
-                        if (pitch.throwFastball(playerTeam.getFastball(), 1)) {
-                            System.out.println("It's a strike!");
-                            strikes++;
-                        } else {
-                            System.out.println("It's a ball!");
-                            balls++;
-                        }
-                    } else if (selectedPitch == 2) {
+                    displayScore(playerScore, cpuScore);
+                    displayOuts(outs);
+                    displayBaserunners(baseRunners);
+                    displayCount(balls, strikes);
+                    selectedPitch = getPitch();
+                    throwSelectedPitch(selectedPitch,startingPitcher,starters,strikes,balls);
+                } while (strikes < 3 && balls < 4);
 
-                    } else if (selectedPitch == 3) {
+                if (strikes == 3)
+                    strikeout();
+                else
+                    walk(baseRunners,cpuScore);
 
-                    } else if (selectedPitch == 4) {
-
-                    } else {
-                        System.out.println("You must select a valid pitch");
-                    }
-                } while (strikes < 3 || balls < 4);
-
-                outs++;
+                strikes = 0;
+                balls = 0;
             } while (outs < 3);
+            System.out.println("Inning over");
+
         } else {
             do {
                 System.out.println("At bat: " + playerTeam.getPlayerName(batter));
@@ -89,10 +92,163 @@ public class Main {
             } while (outs < 3);
         }
 
+    }
 
+    public static void displayPitcherName(int pitcher) {
+        System.out.println("Now pitching: " + playerTeam.getStarterNames(pitcher));
+        System.out.println();
+    }
 
+    public static void displayBatterName(int batter) {
+        System.out.println("Now Batting: " + cpuTeam.getPlayerName(batter));
+        System.out.println();
+    }
 
+    public static void displayScore(int playerScore, int cpuScore) {
+        System.out.println("---Score---");
+        System.out.println("Home: " + playerScore);
+        System.out.println("Away: " + cpuScore);
+        System.out.println("-----------");
+        System.out.println();
+    }
 
+    public static void displayOuts(int outs) {
+        System.out.println("Outs: " + outs);
+        System.out.println();
+    }
+
+    public static void displayBaserunners(boolean[] baseRunners) {
+        if (!baseRunners[0] && !baseRunners[1] && !baseRunners[2])
+            System.out.println("Bases are empty");
+        if (baseRunners[0] && !baseRunners[1] && !baseRunners[2])
+            System.out.println("Runner on first");
+        if (!baseRunners[0] && baseRunners[1] && !baseRunners[2])
+            System.out.println("Runner on second");
+        if (!baseRunners[0] && !baseRunners[1] && baseRunners[2])
+            System.out.println("Runner on third");
+        if (baseRunners[0] && baseRunners[1] && !baseRunners[2])
+            System.out.println("Runners on first & second");
+        if (baseRunners[0] && !baseRunners[1] && baseRunners[2])
+            System.out.println("Runners on first & third");
+        if (baseRunners[0] && baseRunners[1] && baseRunners[2])
+            System.out.println("Bases loaded!");
+    }
+
+    public static void displayCount(int balls, int strikes) {
+        System.out.println("The count is: " + balls + " & " + strikes);
+        System.out.println();
+    }
+
+    public static int getPitch() {
+        System.out.println("Select a pitch:");
+        System.out.println("Fastball (1)  |  Curveball (2)  |  Slider (3)  |  Changeup (4)");
+        System.out.println();
+        Scanner pitchSelect = new Scanner(System.in);
+        return pitchSelect.nextInt();
+    }
+
+    public static void addStrike() {
+        strikes++;
+    }
+
+    public static void addBall() {
+        balls++;
+    }
+
+    public static void throwSelectedPitch(int selectedPitch, int startingPitcher, Pitcher[] starters, int strikes, int balls) {
+        if (selectedPitch == 1) {
+            System.out.println(playerTeam.getStarterNames(startingPitcher) + " throws a fastball");
+            Pitch pitch = new Pitch(playerTeam.getSpecificPitchRating(starters[startingPitcher],selectedPitch),selectedPitch);
+            if (pitch.throwFastball(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch))) {
+                System.out.println("It's a strike!");
+                addStrike();
+            } else {
+                System.out.println("It's a ball!");
+                addBall();
+            }
+        } else if (selectedPitch == 2) {
+            System.out.println(playerTeam.getStarterNames(startingPitcher) + " throws a curveball");
+            Pitch pitch = new Pitch(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch), selectedPitch);
+            if (pitch.throwCurveball(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch))) {
+                System.out.println("It's a strike!");
+                addStrike();
+            } else {
+                System.out.println("It's a ball!");
+                addBall();
+            }
+        } else if (selectedPitch == 3) {
+            System.out.println(playerTeam.getStarterNames(startingPitcher) + " throws a slider");
+            Pitch pitch = new Pitch(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch), selectedPitch);
+            if (pitch.throwSlider(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch))) {
+                System.out.println("It's a strike!");
+                addStrike();
+            } else {
+                System.out.println("It's a ball!");
+                addBall();
+            }
+        } else if (selectedPitch == 4) {
+            System.out.println(playerTeam.getStarterNames(startingPitcher) + " throws a changeup");
+            Pitch pitch = new Pitch(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch), selectedPitch);
+            if (pitch.throwChangeup(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch))) {
+                System.out.println("It's a strike!");
+                addStrike();
+            } else {
+                System.out.println("It's a ball!");
+                addBall();
+            }
+        } else {
+            System.out.println("You must select a valid pitch");
+        }
+    }
+
+    public static void strikeout() {
+        outs++;
+        batter++;
+        if (batter == 10)
+            batter = 1;
+        System.out.println();
+        System.out.println("Batter is out!");
+        System.out.println();
+    }
+
+    public static void walk(boolean[] baseRunners, int cpuScore) {
+        batter++;
+        if (batter == 10)
+            batter = 1;
+        System.out.println("Batter takes base on balls");
+        if (!baseRunners[0])
+            baseRunners[0] = true;
+        else if (baseRunners[0] && !baseRunners[1])
+            baseRunners[1] = true;
+        else if (baseRunners[0] && baseRunners[1] && !baseRunners[2])
+            baseRunners[2] = true;
+        else if (baseRunners[0] && baseRunners[1] && baseRunners[2])
+            cpuScore++;
+    }
+
+    public static int getStartingPitcher(Pitcher[] starters) {
+        Scanner startingPitcherReader = new Scanner(System.in);
+        int selectedPitcher;
+        int startingPitcher = -1;
+        System.out.println("Select your starting pitcher");
+        System.out.println();
+        for (int i = 0; i < starters.length; i++) {
+            System.out.println(playerTeam.getStarterNames(i) + " - " + (i + 1));
+        }
+        System.out.print("[Choose 1 - 5] ");
+        selectedPitcher = startingPitcherReader.nextInt();
+        if (selectedPitcher == 1)
+            startingPitcher = 0;
+        if (selectedPitcher == 2)
+            startingPitcher = 1;
+        if (selectedPitcher == 3)
+            startingPitcher = 2;
+        if (selectedPitcher == 4)
+            startingPitcher = 3;
+        if (selectedPitcher == 5)
+            startingPitcher = 4;
+
+        return startingPitcher;
     }
 
     public static void fastballAnimation() throws InterruptedException {

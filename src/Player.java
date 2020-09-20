@@ -131,10 +131,23 @@ class Pitcher extends Player {
         this.number = number;
     }
 
-    public double getFastball(){return fastball;}
-    public double getCurveball(){return curveball;}
-    public double getSlider(){return slider;}
-    public double getChangeup(){return changeup;}
+    public double getFastballRating(){return fastball;}
+    public double getCurveballRating(){return curveball;}
+    public double getSliderRating(){return slider;}
+    public double getChangeupRating(){return changeup;}
+
+    public double getPitchRating(int pitchType) {
+        double pitchRating = 0.0;
+        if (pitchType == 1)
+            pitchRating = fastball;
+        else if (pitchType == 2)
+            pitchRating = curveball;
+        else if (pitchType == 3)
+            pitchRating = slider;
+        else if (pitchType == 4)
+            pitchRating = changeup;
+        return pitchRating;
+    }
 
 
 }
