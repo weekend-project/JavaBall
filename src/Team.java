@@ -1,43 +1,5 @@
 public class Team {
 
-    // should build an array of player objects with team name
-
-//    Pitchers
-//    Matt Andriese     35	    R/R
-//    Jacob Barnes      40	    R/R
-//    Jaime Barria      51	    R/R
-//    Cam Bedrosian     32	    R/R
-//    Dylan Bundy       37	    S/R
-//    Ty Buttrey        31      L/R
-//    Griffin Canning   47      R/R
-//    Andrew Heaney     28	    L/L
-//    Mike Mayers       60	    R/R
-//    Hoby Milner       61	    L/L
-//    Shohei Ohtani     17	    L/R
-//    Felix Peña        64      R/R
-//    Noé Ramirez       24	    R/R
-//    Hansel Robles     57	    R/R
-//    Julio Teheran     49	    R/R
-
-//    Catchers
-//    Anthony Bemboom   12  	L/R
-//    Max Stassi        33      R/R
-
-//    Infielders
-//    David Fletcher    22	    R/R
-//    Albert Pujols     5	    R/R
-//    Anthony Rendon    6	    R/R
-//    Luis Rengifo      4	    S/R
-//    Andrelton Simmons 2   	R/R
-//    Matt Thaiss       23	    L/R
-//    Jared Walsh       25	    L/L
-
-//    Outfielders
-//    Jo Adell          59      R/R
-//    Mike Trout        27      R/R
-//    Justin Upton      10	    R/R
-//    Taylor Ward       3       R/R
-
     //pitchers
     Pitcher mAndriese = new Pitcher(true,87.1,89.4,78.1,79.2,
             65.1,85.8,56.4,32.1,18.4,'r','r',"Matt Andriese",35);

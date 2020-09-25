@@ -1,3 +1,7 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -14,11 +18,41 @@ public class Main {
     private static boolean[] baseRunners = new boolean[3];
 
 
+    public static void main(String[] args) throws InterruptedException, IOException {
+//        teamSelect();
+        System.out.println(selectStartingPitcher("cubs", "Rotation", "Bullpen"));
+//        startGame(playerTeam, cpuTeam, home);
+    }
 
+    private static ArrayList<String> selectStartingPitcher(String team, String begin, String end) throws IOException {
+        String path = "teams\\" + team + ".csv";    //String "team" should be the name of each file
+        ArrayList<String> startingPitchers = new ArrayList<>();
+        String temp;
+        int i = 0; // for iterating through both do-while loops, which iterates through entire file, line by line
+        int counter = 0; // for keeping track of iteration within inner do-while loop
+        int start = i; // for keeping track of which line in the file starts the inner do-while loop
+        try { //FileNotFoundException
+            do { // Outside do-while loop ensure the entire file is scanned
+                temp = Files.readAllLines(Paths.get(path)).get(i); // each line is set to String temp and then checked for conditions
+                if (temp.startsWith(begin)) { // temp is checked if it starts with String begin
+                    start = i; // if so, then we keep track of which line matches by setting start to equal i
+                    do {
+                        i++; // iterate i first because we want to capture the next line
+                        temp = Files.readAllLines(Paths.get(path)).get(i); // scan each subsequent line
+                        counter++; // add to counter to keep track of how many lines are within range
+                    } while (!temp.startsWith(end)); // keep scanning until the String end is reached
+                } else
+                    i++; // go to the next line
+            } while (!temp.startsWith("exit")); // reads every line in the file until it encounters the String "exit"
+            for (int j = start; j < counter; j++) { // ensures only matched range is assigned to ArrayList
+                startingPitchers.add(j, Files.readAllLines(Paths.get(path)).get(j));
+                //TODO cleanup array (use , to remove all other chars?)
+            }
 
-    public static void main(String[] args) throws InterruptedException {
-        teamSelect();
-        startGame(playerTeam, cpuTeam, home);
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+        return startingPitchers;
     }
 
     public static void teamSelect() {
@@ -71,13 +105,13 @@ public class Main {
                     displayBaserunners(baseRunners);
                     displayCount(balls, strikes);
                     selectedPitch = getPitch();
-                    throwSelectedPitch(selectedPitch,startingPitcher,starters,strikes,balls);
+                    throwSelectedPitch(selectedPitch, startingPitcher, starters, strikes, balls);
                 } while (strikes < 3 && balls < 4);
 
                 if (strikes == 3)
                     strikeout();
                 else
-                    walk(baseRunners,cpuScore);
+                    walk(baseRunners, cpuScore);
 
                 strikes = 0;
                 balls = 0;
@@ -158,7 +192,7 @@ public class Main {
     public static void throwSelectedPitch(int selectedPitch, int startingPitcher, Pitcher[] starters, int strikes, int balls) {
         if (selectedPitch == 1) {
             System.out.println(playerTeam.getStarterNames(startingPitcher) + " throws a fastball");
-            Pitch pitch = new Pitch(playerTeam.getSpecificPitchRating(starters[startingPitcher],selectedPitch),selectedPitch);
+            Pitch pitch = new Pitch(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch), selectedPitch);
             if (pitch.throwFastball(playerTeam.getSpecificPitchRating(starters[startingPitcher], selectedPitch))) {
                 System.out.println("It's a strike!");
                 addStrike();
