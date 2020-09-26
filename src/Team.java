@@ -1,5 +1,7 @@
 public class Team {
 
+    private String teamName;
+
     //pitchers
     Pitcher mAndriese = new Pitcher(true,87.1,89.4,78.1,79.2,
             65.1,85.8,56.4,32.1,18.4,'r','r',"Matt Andriese",35);
@@ -69,12 +71,18 @@ public class Team {
             lineup = startingLineupAngels;
             starters = startingPitchersAngels;
             pen = bullpenAngels;
+            teamName = "Angels";
         } else if (teamNumber == 2) {
             lineup = startingLineupCubs;
             starters = startingPitchersCubs;
             pen = bullpenCubs;
+            teamName = "Cubs";
         }
 
+    }
+
+    public String getTeamName() {
+        return teamName;
     }
 
     public Player[] getLineup() {

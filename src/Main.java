@@ -19,14 +19,14 @@ public class Main {
 
 
     public static void main(String[] args) throws InterruptedException, IOException {
-//        teamSelect();
-        System.out.println(selectStartingPitcher("cubs", "Rotation", "Bullpen"));
+        teamSelect();
+        playerSelect(getPlayerArray(playerTeam.getTeamName(), "Rotation", "Bullpen"));
 //        startGame(playerTeam, cpuTeam, home);
     }
 
-    private static ArrayList<String> selectStartingPitcher(String team, String begin, String end) throws IOException {
+    private static ArrayList<String> getPlayerArray(String team, String begin, String end) throws IOException {
         String path = "teams\\" + team + ".csv";    //String "team" should be the name of each file
-        ArrayList<String> startingPitchers = new ArrayList<>();
+        ArrayList<String> playerList = new ArrayList<>();
         String temp;
         int i = 0; // for iterating through both do-while loops, which iterates through entire file, line by line
         int counter = 0; // for keeping track of iteration within inner do-while loop
@@ -45,14 +45,25 @@ public class Main {
                     i++; // go to the next line
             } while (!temp.startsWith("exit")); // reads every line in the file until it encounters the String "exit"
             for (int j = start; j < counter; j++) { // ensures only matched range is assigned to ArrayList
-                startingPitchers.add(j, Files.readAllLines(Paths.get(path)).get(j));
+                playerList.add(j, Files.readAllLines(Paths.get(path)).get(j));
                 //TODO cleanup array (use , to remove all other chars?)
             }
 
         } catch (FileNotFoundException e) {
             System.out.println(e);
         }
-        return startingPitchers;
+        return playerList;
+    }
+
+    public static void playerSelect(ArrayList<String> players) {
+        for (int j = 0; j < players.size(); j++) {
+            String str = players.get(j);
+            String[] arr = str.split(",");
+            if (j == 0)
+                System.out.println("--" + arr[0] + "--");
+            else
+                System.out.println(arr[0] + " - " + j);
+        }
     }
 
     public static void teamSelect() {
@@ -77,9 +88,11 @@ public class Main {
         if (homeOrAway == 1) {
             home = true;
             System.out.println("You will play at home and you will pitch first");
+            System.out.println();
         } else {
             home = false;
             System.out.println("You will play away and bat first");
+            System.out.println();
         }
     }
 

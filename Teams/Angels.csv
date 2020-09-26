@@ -1,0 +1,48 @@
+Rotation,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Andrew Heaney,28,L/L,"6' 2""",200,06/05/1991,,,,,,,,,,,,
+Dylan Bundy,37,S/R,"6' 1""",225,11/15/1992,,,,,,,,,,,,
+Griffin Canning,47,R/R,"6' 2""",180,05/11/1996,,,,,,,,,,,,
+Jaime Barria,51,R/R,"6' 1""",210,07/18/1996,,,,,,,,,,,,
+Julio Teheran,49,R/R,"6' 2""",205,01/27/1991,,,,,,,,,,,,
+Bullpen,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Ty Buttrey,31,L/R,"6' 6""",240,03/31/1993,,,,,,,,,,,,
+Noé Ramirez,24,R/R,"6' 3""",205,12/22/1989,,,,,,,,,,,,
+Mike Mayers,60,R/R,"6' 2""",220,12/06/1991,,,,,,,,,,,,
+Hansel Robles,57,R/R,"6' 0""",220,08/13/1990,,,,,,,,,,,,
+Jacob Barnes,40,R/R,"6' 2""",231,04/14/1990,,,,,,,,,,,,
+Matt Andriese,35,R/R,"6' 2""",215,08/28/1989,,,,,,,,,,,,
+Cam Bedrosian,32,R/R,"6' 1""",225,10/02/1991,,,,,,,,,,,,
+Felix Peña,64,R/R,"6' 2""",220,02/25/1990,,,,,,,,,,,,
+Hoby Milner,61,L/L,"6' 3""",175,01/13/1991,,,,,,,,,,,,
+Patrick Sandoval,43,L/L,"6' 3""",190,10/18/1996,,,,,,,,,,,,
+Catcher,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Max Stassi,33,R/R,"5' 10""",200,03/15/1991,,,,,,,,,,,,
+Anthony Bemboom,12,L/R,"6' 2""",200,01/18/1990,,,,,,,,,,,,
+First Base,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Albert Pujols,5,R/R,"6' 3""",235,01/16/1980,,,,,,,,,,,,
+Jared Walsh,25,L/L,"6' 0""",210,07/30/1993,,,,,,,,,,,,
+Second Base,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Luis Rengifo,4,S/R,"5' 10""",195,02/26/1997,,,,,,,,,,,,
+David Fletcher,22,R/R,"5' 9""",185,05/31/1994,,,,,,,,,,,,
+Franklin Barreto,8,R/R,"5' 10""",208,02/27/1996,,,,,,,,,,,,
+Third Base,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Anthony Rendon,6,R/R,"6' 1""",200,06/06/1990,,,,,,,,,,,,
+David Fletcher,22,R/R,"5' 9""",185,05/31/1994,,,,,,,,,,,,
+Shortstop,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+David Fletcher,22,R/R,"5' 9""",185,05/31/1994,,,,,,,,,,,,
+Elliot Soto,7,R/R,"5' 9""",160,08/21/1989,,,,,,,,,,,,
+Luis Rengifo,4,S/R,"5' 10""",195,02/26/1997,,,,,,,,,,,,
+Franklin Barreto,8,R/R,"5' 10""",208,02/27/1996,,,,,,,,,,,,
+Left Field,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Justin Upton,10,R/R,"6' 1""",215,08/25/1987,,,,,,,,,,,,
+Taylor Ward,3,R/R,"6' 1""",200,12/14/1993,,,,,,,,,,,,
+Center Field,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Mike Trout,27,R/R,"6' 2""",235,08/07/1991,,,,,,,,,,,,
+Jo Adell,59,R/R,"6' 3""",215,04/08/1999,,,,,,,,,,,,
+Right Field,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Jo Adell,59,R/R,"6' 3""",215,04/08/1999,,,,,,,,,,,,
+Taylor Ward,3,R/R,"6' 1""",200,12/14/1993,,,,,,,,,,,,
+Designated Hitter,NUM,B/T,HT,WT,DOB,OVERALL,H/9,K/9,BB/9,HR/9,STAMINA,VELOCITY,CONTROL,BREAK,FIELDING,BUNTING,REPERTOIRE
+Shohei Ohtani,17,L/R,"6' 4""",210,07/05/1994,,,,,,,,,,,,
+Albert Pujols,5,R/R,"6' 3""",235,01/16/1980,,,,,,,,,,,,
+exit
