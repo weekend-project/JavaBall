@@ -70,18 +70,6 @@ public class Team {
 
     public Team(int teamNumber) {
         playerTeamName = Main.TEAMS[teamNumber];
-//        if (teamNumber == 1) {
-//            lineup = startingLineupAngels;
-//            starters = startingPitchersAngels;
-//            pen = bullpenAngels;
-//            playerTeamName = "Angels";
-//        } else if (teamNumber == 2) {
-//            lineup = startingLineupCubs;
-//            starters = startingPitchersCubs;
-//            pen = bullpenCubs;
-//            playerTeamName = "Cubs";
-//        }
-
     }
 
     public Team (int cpuTeamNumber, boolean cpuTeam) {
