@@ -11,6 +11,13 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final String[] POSITIONS = {"Rotation", "Catcher", "First Base", "Second Base", "Third Base", "Shortstop",
+            "Left Field", "Center Field", "Right Field", "Designated Hitter"};
+    public static final String[] TEAMS = new String[38];
+
+    private static boolean[] baseRunners = new boolean[3];
+    private static int[] playerSelectedPositions = new int[10];
+
     private static Team playerTeam;
     private static Team cpuTeam;
     private static boolean home;
@@ -20,16 +27,10 @@ public class Main {
     private static int batter = 1;
     private static int cpuScore = 0;
 
-    private static boolean[] baseRunners = new boolean[3];
-    private static String[] positions = {"Rotation", "Catcher", "First Base", "Second Base", "Third Base", "Shortstop",
-            "Left Field", "Center Field", "Right Field", "Designated Hitter"};
-    public static final String[] TEAMS = new String[38];
-
-    private static int[] playerSelectedPositions = new int[10];
 
     // lineup is a list of the 10 starting players, battingOrder is the batting order of the 9 starting position players
     private static String[] lineup = new String[10];
-    private static String[] battingOrder = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY",};
+    private static String[] battingOrder = new String[9];
     private static Scanner reader = new Scanner(System.in);
     private static ArrayList<String> rotation;
     private static ArrayList<String> catcher;
@@ -50,7 +51,7 @@ public class Main {
         selectTeams();
         buildBullpenArray();
         homeTeamSelect();
-        buildLineup(); //TODO prevent player from picking duplicate players
+        buildLineup();
         buildBattingOrder(); //TODO allow player to edit order
 //        startGame(playerTeam, cpuTeam, home);
     }
@@ -149,90 +150,76 @@ public class Main {
     }
 
     public static void buildLineup() throws IOException {
-        for (int start = 0, end = 1; start < positions.length; start++, end++) {
-            boolean duplicate = false;
+        for (int start = 0, end = 1; start < POSITIONS.length; start++, end++) {
+            boolean duplicate;
 
             if (start == 0 && end == 1) {
-
-                playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                rotation = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
-                System.out.println();
-                System.out.print("Choose a player for " + positions[start] + ": ");
-                playerSelectedPositions[start] = reader.nextInt();
-                System.out.println();
-                lineup[start] = rotation.get(playerSelectedPositions[start] - 1);
-
+                // there will never be a duplicate pitcher and catcher, so no need to check for duplicates
+                selectStartingPitcher(start, end);
             } else if (start == 1 && end == 2) {
-
-                playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                catcher = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
-                System.out.println();
-                System.out.print("Choose a player for " + positions[start] + ": ");
-                playerSelectedPositions[start] = reader.nextInt();
-                System.out.println();
-                lineup[start] = catcher.get(playerSelectedPositions[start] - 1);
-
+                // there will never be a duplicate pitcher and catcher, so no need to check for duplicates
+                selectCatcher(start, end);
             } else if (start == 2 && end == 3) {
 
                 do {
-                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                    firstBase = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
+                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+                    firstBase = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
                     duplicate = checkForDuplicatePlayers(start, firstBase);
                 } while (duplicate);
 
             } else if (start == 3 && end == 4) {
 
                 do {
-                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                    secondBase = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
+                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+                    secondBase = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
                     duplicate = checkForDuplicatePlayers(start, secondBase);
                 } while (duplicate);
 
             } else if (start == 4 && end == 5) {
 
                 do {
-                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                    thirdBase = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
+                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+                    thirdBase = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
                     duplicate = checkForDuplicatePlayers(start, thirdBase);
                 } while (duplicate);
 
             } else if (start == 5 && end == 6) {
 
                 do {
-                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                    shortstop = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
+                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+                    shortstop = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
                     duplicate = checkForDuplicatePlayers(start, shortstop);
                 } while (duplicate);
 
             } else if (start == 6 && end == 7) {
 
                 do {
-                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                    leftField = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
+                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+                    leftField = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
                     duplicate = checkForDuplicatePlayers(start, leftField);
                 } while (duplicate);
 
             } else if (start == 7 && end == 8) {
 
                 do {
-                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                    centerField = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
+                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+                    centerField = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
                     duplicate = checkForDuplicatePlayers(start, centerField);
                 } while (duplicate);
 
             } else if (start == 8 && end == 9) {
 
                 do {
-                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end]));
-                    rightField = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], positions[end])));
+                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+                    rightField = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
                     duplicate = checkForDuplicatePlayers(start, rightField);
                 } while (duplicate);
 
             } else if (start == 9 && end == 10) {
 
                 do {
-                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], "Bullpen"));
-                    dh = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), positions[start], "Bullpen")));
+                    playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], "Bullpen"));
+                    dh = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], "Bullpen")));
                     duplicate = checkForDuplicatePlayers(start, dh);
                 } while (duplicate);
             }
@@ -247,13 +234,14 @@ public class Main {
         playerPos.add(centerField);
         playerPos.add(rightField);
         playerPos.add(dh);
+        playerPos.add(bullpen); // this will be used later, but may not be needed in this method
         System.out.println("Proceed with the following players at these positions?");
         System.out.println("------------------------------------------------------");
-        for (int i = 0; i < positions.length; i++) {
+        for (int i = 0; i < POSITIONS.length; i++) {
             if (i == 0) {
                 System.out.println("Starting Pitcher: " + playerPos.get(i).get(playerSelectedPositions[i] - 1)); // A 2D ArrayList
             } else {
-                System.out.println(positions[i] + ": " + playerPos.get(i).get(playerSelectedPositions[i] - 1));
+                System.out.println(POSITIONS[i] + ": " + playerPos.get(i).get(playerSelectedPositions[i] - 1));
             }
         }
         System.out.println("------------------------------------------------------");
@@ -263,16 +251,38 @@ public class Main {
         int proceed = reader.nextInt();
         if (proceed == 2) {
             playerPos.clear();
+            Arrays.fill(lineup, null);
             buildLineup();
         }
     }
 
+    public static void selectStartingPitcher(int start, int end) throws IOException {
+        playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+        rotation = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
+        System.out.println();
+        System.out.print("Choose a player for " + POSITIONS[start] + ": ");
+        playerSelectedPositions[start] = reader.nextInt();
+        System.out.println();
+        lineup[start] = rotation.get(playerSelectedPositions[start] - 1);
+    }
+
+    public static void selectCatcher(int start, int end) throws IOException {
+        playerSelect(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end]));
+        catcher = new ArrayList<>(buildPlayerArray(parseTeamCSVtoArrayList(playerTeam.getTeamName(), POSITIONS[start], POSITIONS[end])));
+        System.out.println();
+        System.out.print("Choose a player for " + POSITIONS[start] + ": ");
+        playerSelectedPositions[start] = reader.nextInt();
+        System.out.println();
+        lineup[start] = catcher.get(playerSelectedPositions[start] - 1);
+    }
+
+    //FIXME the lineup array is not being written to correctly
     public static boolean checkForDuplicatePlayers(int index, ArrayList<String> pos) {
         boolean duplicateFound = false;
         int counter = 0;
         String tempChecker;
         System.out.println();
-        System.out.print("Choose a player for " + positions[index] + ": ");
+        System.out.print("Choose a player for " + POSITIONS[index] + ": ");
         playerSelectedPositions[index] = reader.nextInt();
         System.out.println();
         tempChecker = pos.get(playerSelectedPositions[index] - 1);
@@ -297,7 +307,8 @@ public class Main {
         return duplicateFound;
     }
 
-    public static void buildBattingOrder() {
+    public static void buildBattingOrder() throws IOException {
+        Arrays.fill(battingOrder, "EMPTY");
         ArrayList<String> tempLineup = new ArrayList<>();
         Scanner reader = new Scanner(System.in);
         int spot;
@@ -307,11 +318,16 @@ public class Main {
         }
         System.out.println();
         while (!tempLineup.isEmpty()) {
-            System.out.println("-----------------------------");
-            System.out.println("Players remaining:");
-            for (String s : tempLineup)
-                System.out.println(s);
-            System.out.println("-----------------------------");
+            System.out.println("    |---------------------------------------------------------------------------------------------------------------------------------|");
+            System.out.println("    |  B/T   | OVERALL  |  CONT R  |  CONT L  | POWER R  | POWER L  |  VISION  | FIELDING | ARM STR  | REACTION |  SPEED   | STEALING |");
+            System.out.println("    |---------------------------------------------------------------------------------------------------------------------------------|");
+            for (int i = 0; i < lineup.length - 1; i++)
+                printBatterInfo(parseTeamCSVtoArrayList(playerTeam.getTeamName(),
+                        playerPos.get(i + 1).get(playerSelectedPositions[i] - 1),
+                        playerPos.get(i + 1).get(playerSelectedPositions[i])));
+
+
+            System.out.println("    |---------------------------------------------------------------------------------------------------------------------------------|");
             System.out.println();
             System.out.println("Current lineup:");
             for (int i = 0; i < battingOrder.length; i++)
@@ -326,6 +342,27 @@ public class Main {
             player = reader.nextInt();
             battingOrder[spot - 1] = tempLineup.get(player - 1);
             tempLineup.remove(player - 1);
+        }
+    }
+
+    public static void printBatterInfo(ArrayList<String> players) {
+
+        for (int i = 0; i < players.size(); i++) {
+            String str = players.get(i);
+            String[] playerRow = str.split(",");
+            if (i == 0) {
+                System.out.print("    -> " + playerRow[0] + "\n"); // displays the header row for the stats
+                System.out.print("    |  " + playerRow[2]); // displays only the "B/T" header
+                for (int j = 6; j <= 16; j++) {
+                    if (j == 6)
+                        System.out.print("   ");
+                    if (Integer.parseInt(playerRow[j]) < 10)
+                        System.out.print("|    " + playerRow[j] + "     "); // displays each individual stat
+                    else
+                        System.out.print("|    " + playerRow[j] + "    "); // displays each individual stat
+                }
+                System.out.println("|");
+            }
         }
     }
 
@@ -394,24 +431,24 @@ public class Main {
     private static ArrayList<String> parseTeamCSVtoArrayList(String team, String begin, String end) throws IOException {
         String path = "Teams\\" + team + ".csv";    //String "team" should be the name of each file
         ArrayList<String> playerList = new ArrayList<>();
-        String temp;
+        String row;
         int i = 0; // for iterating through both do-while loops, which iterates through entire file, line by line
         int counter = 0; // for keeping track of iteration within inner do-while loop
         int start = i; // for keeping track of which line in the file starts the inner do-while loop
         try { //FileNotFoundException
             do { // Outside do-while loop ensure the entire file is scanned
-                temp = Files.readAllLines(Paths.get(path)).get(i); // each line is set to String temp and then checked for conditions
-                if (temp.startsWith(begin)) { // temp is checked if it starts with String begin
+                row = Files.readAllLines(Paths.get(path)).get(i); // each line is set to String row and then checked for conditions
+                if (row.startsWith(begin)) { // temp is checked if it starts with String begin
                     start = i; // if so, then we keep track of which line matches by setting start to equal i
                     do {
                         i++; // iterate i first because we want to capture the next line
-                        temp = Files.readAllLines(Paths.get(path)).get(i); // scan each subsequent line
+                        row = Files.readAllLines(Paths.get(path)).get(i); // scan each subsequent line
                         counter++; // add to counter to keep track of how many lines are within range
-                    } while (!temp.startsWith(end)); // keep scanning until the String end is reached
+                    } while (!row.startsWith(end)); // keep scanning until the String end is reached
                     break;
                 } else
                     i++; // go to the next line
-            } while (!temp.startsWith("exit")); // reads every line in the file until it encounters the String "exit"
+            } while (!row.startsWith("exit")); // reads every line in the file until it encounters the String "exit"
             for (int j = 0; j < counter; j++, start--)  // ensures only matched range is assigned to ArrayList
                 playerList.add(0, Files.readAllLines(Paths.get(path)).get((start + counter) - 1));
         } catch (FileNotFoundException e) {
@@ -421,7 +458,7 @@ public class Main {
     }
 
     //FIXME this will need to be fixed when changing to updated CSV files from FileFixer
-    public static void playerSelect(ArrayList<String> players) throws IOException {
+    public static void playerSelect(ArrayList<String> players) {
         for (int i = 0; i < players.size(); i++) {
             String str = players.get(i);
             String[] playerRow = str.split(",");
