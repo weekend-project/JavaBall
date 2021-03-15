@@ -1,0 +1,58 @@
+rotation
+Kyle Hendricks,28,R/R
+Zach Davies,27,R/R
+Alec Mills,30,R/R
+Jake Arrieta,49,R/R
+Adbert Alzolay,73,R/R
+Trevor Williams,32,R/R
+Brailyn Marquez,61,L/L
+bullpen
+Craig Kimbrel,46,R/R
+Rowan Wick,50,L/R
+Brandon Workman,45,R/R
+Brad Wieck,38,L/L
+Ryan Tepera,18,R/R
+Dan Winkler,43,R/R
+Kyle Ryan,56,L/L
+James Norwood,57,R/R
+Jason Adam,60,R/R
+Robert Stock,89,L/R
+Rex Brothers,48,L/L
+Dillon Maples,36,R/R
+Justin Steele,35,L/L
+Andrew Chafin,39,R/L
+Jonathan Holder,52,R/R
+catcher
+Willson Contreras,40,R/R
+Austin Romine,25,R/R
+first_base
+Anthony Rizzo,44,L/L
+Kris Bryant,17,R/R
+second_base
+David Bote,13,R/R
+Nico Hoerner,2,R/R
+Ildemaro Vargas,16,S/R
+third_base
+Kris Bryant,17,R/R
+David Bote,13,R/R
+Ildemaro Vargas,16,S/R
+Nico Hoerner,2,R/R
+shortstop
+Javier Báez,9,R/R
+Nico Hoerner,2,R/R
+David Bote,13,R/R
+left_field
+Joc Pederson,24,L/L
+Ian Happ,8,S/R
+Kris Bryant,17,R/R
+Cameron Maybin,15,R/R
+center_field
+Ian Happ,8,S/R
+Nico Hoerner,2,R/R
+Jason Heyward,22,L/L
+Cameron Maybin,15,R/R
+Jake Marisnick,6,R/R
+right_field
+Jason Heyward,22,L/L
+Ian Happ,8,S/R
+Cameron Maybin,15,R/R

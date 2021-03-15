@@ -1,0 +1,58 @@
+rotation
+Yu Darvish,11,R/R
+Blake Snell,24,L/L
+Dinelson Lamet,29,R/R
+Joe Musgrove,44,R/R
+Chris Paddack,59,R/R
+Mike Clevinger,52,R/R
+bullpen
+Drew Pomeranz,15,R/L
+Emilio Pagán,14,L/R
+Matt Strahm,55,R/L
+Mark Melancon,33,R/R
+Pierce Johnson,36,R/R
+Dan Altavilla,57,R/R
+Tim Hill,25,R/L
+Craig Stammen,34,R/R
+Austin Adams,54,R/R
+Michel Baez,49,R/R
+José Castillo,65,L/L
+Taylor Williams,45,S/R
+Javy Guerra,8,L/R
+Adrian Morejon,50,L/L
+Ryan Weathers,40,R/L
+catcher
+Austin Nola,26,R/R
+Victor Caratini,17,S/R
+Luis Campusano,21,R/R
+first_base
+Eric Hosmer,30,L/L
+Austin Nola,26,R/R
+Jake Cronenworth,9,L/R
+Brian O'Grady,5,L/R
+second_base
+Jake Cronenworth,9,L/R
+Jurickson Profar,10,S/R
+Ha-seong Kim,7,R/R
+third_base
+Manny Machado,13,R/R
+Ha-seong Kim,7,R/R
+Austin Nola,26,R/R
+Brian O'Grady,5,L/R
+shortstop
+Fernando Tatis Jr.,23,R/R
+Jake Cronenworth,9,L/R
+Ha-seong Kim,7,R/R
+Jorge Mateo,3,R/R
+left_field
+Tommy Pham,28,R/R
+Jurickson Profar,10,S/R
+Brian O'Grady,5,L/R
+center_field
+Trent Grisham,2,L/L
+Brian O'Grady,5,L/R
+Jorge Mateo,3,R/R
+right_field
+Wil Myers,4,R/R
+Jorge Mateo,3,R/R
+Brian O'Grady,5,L/R

@@ -1,0 +1,43 @@
+rotation
+Dylan Bundy,37,S/R
+Andrew Heaney,28,L/L
+José Quintana,62,R/L
+Griffin Canning,47,R/R
+Shohei Ohtani,17,L/R
+Alex Cobb,38,R/R
+bullpen
+Raisel Iglesias,32,R/R
+Ty Buttrey,31,L/R
+Alex Claudio,58,L/L
+Mike Mayers,21,R/R
+Félix Peña,64,R/R
+Jose Alberto Rivera,61,R/R
+Jaime Barria,51,R/R
+Junior Guerra,41,R/R
+Patrick Sandoval,43,L/L
+catcher
+Max Stassi,33,R/R
+Kurt Suzuki,24,R/R
+Anthony Bemboom,12,L/R
+first_base
+Jared Walsh,20,L/L
+Albert Pujols,5,R/R
+second_base
+David Fletcher,22,R/R
+Luis Rengifo,2,S/R
+Franklin Barreto,8,R/R
+third_base
+Anthony Rendon,6,R/R
+shortstop
+José Iglesias,4,R/R
+Luis Rengifo,2,S/R
+Franklin Barreto,8,R/R
+left_field
+Justin Upton,10,R/R
+Taylor Ward,3,R/R
+center_field
+Mike Trout,27,R/R
+Juan Lagares,19,R/R
+right_field
+Dexter Fowler,25,S/R
+Taylor Ward,3,R/R
